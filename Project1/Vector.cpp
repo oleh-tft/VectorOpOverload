@@ -79,6 +79,90 @@ int Vector::PopBack()
 	return el;
 }
 
+void Vector::AddFirst(int value)
+{
+	int* temp = new int[size + 1];
+
+	for (int i = 0; i < size; i++)
+	{
+		temp[i + 1] = arr[i];
+	}
+	temp[0] = value;
+
+	delete[] arr;
+	arr = temp;
+	size++;
+}
+
+void Vector::AddElement(int index, int value)
+{
+	int* temp = new int[size + 1];
+
+	for (int i = 0; i < index; i++)
+	{
+		temp[i] = arr[i];
+	}
+
+	for (int i = index; i < size; i++)
+	{
+		temp[i + 1] = arr[i];
+	}
+
+	temp[index] = value;
+
+	delete[] arr;
+	arr = temp;
+	size++;
+}
+
+void Vector::Remove(int index)
+{
+	int* temp = new int[size - 1];
+	for (int i = 0; i < index; i++)
+	{
+		temp[i] = arr[i];
+	}
+
+	for (int i = index; i < size; i++)
+	{
+		temp[i] = arr[i + 1];
+	}
+
+	delete[] arr;
+	arr = temp;
+	size--;
+}
+
+void Vector::RemoveFirst()
+{
+	int* temp = new int[size - 1];
+	for (int i = 0; i < size; i++)
+	{
+		temp[i] = arr[i + 1];
+	}
+
+	delete[] arr;
+	arr = temp;
+	size--;
+}
+
+void Vector::Concat(int* add, int AddSize)
+{
+	int* temp = new int[size + AddSize];
+	for (int i = 0; i < size; i++)
+	{
+		temp[i] = arr[i];
+	}
+	for (int i = 0; i < AddSize; i++)
+	{
+		temp[size + i] = add[i];
+	}
+
+	delete[] arr;
+	arr = temp;
+	size += AddSize;
+}
+
 Vector Vector::operator-(int a)
 {
 	Vector rez(size - a);
