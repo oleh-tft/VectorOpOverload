@@ -20,6 +20,16 @@ public:
 	Vector operator+(int a);
 	Vector operator+(Vector & b);
 	Vector operator*(int a);
+
+	Vector& operator++();
+	Vector operator++(int);
+	Vector& operator--();
+	Vector operator--(int);
+	Vector& operator+=(int a);
+	Vector& operator-=(int a);
+	Vector& operator*=(int a);
+
+	Vector& operator=(const Vector& obj);
 };
 
 /*
