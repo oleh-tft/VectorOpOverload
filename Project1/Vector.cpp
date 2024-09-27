@@ -326,6 +326,12 @@ Vector operator*=(Vector& obj, int a)
 
 Vector operator-(int a, Vector& obj)
 {
+	if (obj.GetSize() <= a)
+	{
+		cout << "Input value must be lower than " << obj.GetSize() << endl;
+		return obj;
+	}
+
 	Vector t(obj.GetSize() - a);
 
 	for (int i = 0; i < obj.GetSize() - a; i++)

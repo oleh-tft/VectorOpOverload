@@ -13,7 +13,7 @@ int main()
 	obj += 5;
 	obj.Print();
 
-	obj -= 2;
+	obj -= 4;
 	obj.Print();
 
 	obj *= 5;
