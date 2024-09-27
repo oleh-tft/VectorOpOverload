@@ -213,106 +213,30 @@ Vector Vector::operator*(int a)
 	return rez;
 }
 
-Vector& Vector::operator++()
+int Vector::GetSize()const
 {
-	int* temp = new int[size + 1];
+	return size;
+}
 
-	for (int i = 0; i < size; i++)
-	{
-		temp[i + 1] = arr[i];
-	}
-	temp[0] = 0;
+void Vector::SetSize(int Size)
+{
+	size = Size;
+}
+
+int* Vector::GetArr() const
+{
+	return arr;
+}
+
+void Vector::SetArr(int* Arr)
+{
 	delete[] arr;
-
-	arr = temp;
-	size++;
-	return *this;
+	arr = Arr;
 }
 
-Vector Vector::operator++(int)
+int Vector::operator[](int index)
 {
-	Vector temp = *this;
-
-	++*this;
-
-	return temp;
-}
-
-Vector& Vector::operator--()
-{
-	int* temp = new int[size - 1];
-
-	for (int i = 0; i < size - 1; i++)
-	{
-		temp[i] = arr[i + 1];
-	}
-	delete[] arr;
-
-	arr = temp;
-	size--;
-	return *this;
-}
-
-Vector Vector::operator--(int)
-{
-	Vector temp = *this;
-
-	--*this;
-
-	return temp;
-}
-
-Vector& Vector::operator+=(int a)
-{
-	int* temp = new int[size + a];
-
-	for (int i = 0; i < size + a; i++)
-	{
-		temp[i] = i >= size ? 0 : arr[i];
-	}
-
-	delete[] arr;
-	arr = temp;
-	size += a;
-
-	return *this;
-}
-
-Vector& Vector::operator-=(int a)
-{
-	if (size < a)
-	{
-		cout << "Input value must be lower than " << size + 1 << endl;
-		return *this;
-	}
-
-	int* temp = new int[size - a];
-
-	for (int i = 0; i < size - a; i++)
-	{
-		temp[i] = arr[i];
-	}
-
-	delete[] arr;
-	arr = temp;
-	size -= a;
-
-	return *this;
-}
-
-Vector& Vector::operator*=(int a)
-{
-	int* temp = new int[size];
-
-	for (int i = 0; i < size; i++)
-	{
-		temp[i] = arr[i] * a;
-	}
-
-	delete[] arr;
-	arr = temp;
-
-	return *this;
+	return arr[index];
 }
 
 Vector& Vector::operator=(const Vector& obj)
@@ -329,4 +253,69 @@ Vector& Vector::operator=(const Vector& obj)
 	}
 
 	return *this;
+}
+
+Vector operator+=(Vector& obj, int a)
+{
+	int* temp = new int[obj.GetSize() + a];
+
+	for (int i = 0; i < obj.GetSize() + a; i++)
+	{
+		temp[i] = i >= obj.GetSize() ? 0 : obj[i];
+	}
+
+	obj.SetArr(temp);
+	obj.SetSize(obj.GetSize() + a);
+
+	return obj;
+}
+
+Vector operator-=(Vector& obj, int a)
+{
+	if (obj.GetSize() < a)
+	{
+		cout << "Input value must be lower than " << obj.GetSize() + 1 << endl;
+		return obj;
+	}
+
+	int* temp = new int[obj.GetSize() - a];
+
+	for (int i = 0; i < obj.GetSize() - a; i++)
+	{
+		temp[i] = obj[i];
+	}
+
+	obj.SetArr(temp);
+	obj.SetSize(obj.GetSize() - a);
+
+	return obj;
+}
+
+Vector operator*=(Vector& obj, int a)
+{
+	int* temp = new int[obj.GetSize()];
+
+	for (int i = 0; i < obj.GetSize(); i++)
+	{
+		temp[i] = obj[i] * a;
+	}
+
+	obj.SetArr(temp);
+
+	return obj;
+}
+
+Vector operator-(int a, Vector& obj)
+{
+	Vector t(obj.GetSize() - a);
+	int* temp = new int[obj.GetSize() - a];
+
+	for (int i = 0; i < obj.GetSize() - a; i++)
+	{
+		temp[i] = obj[i + a];
+	}
+
+	t.SetArr(temp);
+
+	return t;
 }
