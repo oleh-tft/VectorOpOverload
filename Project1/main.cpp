@@ -23,4 +23,8 @@ int main()
 	c.Print();
 	obj.Print();
 
+	Vector inp(4);
+	cin >> inp;
+	cout << inp;
+
 }

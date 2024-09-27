@@ -255,6 +255,25 @@ Vector& Vector::operator=(const Vector& obj)
 	return *this;
 }
 
+ostream& operator<<(ostream& os, Vector& obj)
+{
+	for (int i = 0; i < obj.size; i++)
+	{
+		os << obj.arr[i] << " ";
+	}
+	os << endl;
+	return os;
+}
+
+istream& operator>>(istream& is, Vector& obj)
+{
+	for (int i = 0; i < obj.size; i++)
+	{
+		is >> obj.arr[i];
+	}
+	return is;
+}
+
 Vector operator+=(Vector& obj, int a)
 {
 	int* temp = new int[obj.GetSize() + a];
@@ -308,14 +327,11 @@ Vector operator*=(Vector& obj, int a)
 Vector operator-(int a, Vector& obj)
 {
 	Vector t(obj.GetSize() - a);
-	int* temp = new int[obj.GetSize() - a];
 
 	for (int i = 0; i < obj.GetSize() - a; i++)
 	{
-		temp[i] = obj[i + a];
+		t.GetArr()[i] = obj[i + a];
 	}
-
-	t.SetArr(temp);
 
 	return t;
 }
