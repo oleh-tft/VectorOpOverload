@@ -30,6 +30,17 @@ Vector::Vector(const Vector& obj)
 		this->arr[i] = obj.arr[i];
 	}
 }
+Vector::Vector(initializer_list<int> a)
+{
+	size = a.size();
+	arr = new int[size];
+	for (auto x = a.begin(); x != a.end(); x++)
+	{
+		*arr = *x;
+		arr++;
+	}
+	arr -= size;
+}
 void Vector::InputRand()
 {
 	for (int i = 0; i < size; i++)
@@ -228,7 +239,7 @@ int* Vector::GetArr() const
 	return arr;
 }
 
-void Vector::SetArr(int* Arr)
+void Vector::SetArr(int * Arr)
 {
 	delete[] arr;
 	arr = Arr;

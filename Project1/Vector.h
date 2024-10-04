@@ -10,11 +10,11 @@ class Vector
 	friend istream& operator>>(istream& is, Vector& obj);
 public:
 	Vector();
+	Vector(int s);
 	~Vector();
 	Vector(const Vector & obj);
+	Vector(initializer_list<int> a);
 
-
-	Vector(int s);
 	void InputRand();
 	void Print();
 

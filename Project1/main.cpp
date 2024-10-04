@@ -23,8 +23,11 @@ int main()
 	c.Print();
 	obj.Print();
 
-	Vector inp(4);
-	cin >> inp;
-	cout << inp;
+	//Vector inp(4);
+	//cin >> inp;
+	//cout << inp;
+
+	Vector initTest{8, 1, 2, 4, 2, 3, 1, 2};
+	initTest.Print();
 
 }
